@@ -1,0 +1,4 @@
+[debug] [api-test] Classpath dependencies List(core, model)
+[debug] [api-test] Dependencies from configurations List(api)
+[debug] Bloop wrote the configuration of project 'api-test' to '/home/karim/Desktop/work/mini-octopus/.bloop/api-test.json'
+[success] Generated .bloop/api-test.json
