@@ -1,15 +1,15 @@
-name: Scala CI
-
-on:
-  pull_request:
-    branches: [ master ]
+name: Check scalafmt on push
+on: [push]
 
 jobs:
-  build:
-
+  scalafmt-lint:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Scalafmt Action
-      uses: openlawteam/scalafmt-ci@v2.0.2
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Checking your code to see if u r naughty or nice
+        uses: openlawteam/scalafmt-ci@v2
+        with:
+          args: "--exclude=third_party --list"
 
