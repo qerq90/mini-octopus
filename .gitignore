@@ -35,11 +35,11 @@
 
 # sbt's target directories
 /target/
-/project/**/target/
-/test/macro-annot/target/
-/test/files/target/
-/test/target/
-/build-sbt/
+project/**/target
+test/macro-annot/target
+test/files/target
+test/target
+build-sbt
 local.sbt
 jitwatch.out
 
