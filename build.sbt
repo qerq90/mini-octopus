@@ -6,7 +6,7 @@ organization := "qerq90"
 version := "1.0"
 
 lazy val root = (project in file("."))
-	.aggregate(core, api)
+	.aggregate(core, api, model)
 
 
 lazy val api = (project in file("mini-octopus-api"))
