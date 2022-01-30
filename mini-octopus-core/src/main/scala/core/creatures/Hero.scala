@@ -9,9 +9,9 @@ case class Hero(
     override var hp: Int,
     override var maxHp: Int,
     override var attack: Int,
-    override var state: Status
+    override var status: Status
 ) extends Creature {
-  override def toString = s"$name have $hp hp and $attack atk and is $state"
+  override def toString = s"$name have $hp hp and $attack atk and is $status"
 }
 
 object Hero {
