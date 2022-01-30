@@ -1,0 +1,4 @@
+[debug] [model-test] Classpath dependencies List()
+[debug] [model-test] Dependencies from configurations List(model)
+[debug] Bloop wrote the configuration of project 'model-test' to '/home/karim/Desktop/work/mini-octopus/.bloop/model-test.json'
+[success] Generated .bloop/model-test.json
