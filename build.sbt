@@ -14,7 +14,12 @@ lazy val api = (project in file("mini-octopus-api"))
   .dependsOn(core, model)
 
 lazy val core = (project in file("mini-octopus-core"))
-	.settings(standartSettings)
+	.settings(standartSettings, libraryDependencies ++= Seq(
+		zio,
+		configZIO,
+		typesafeConfigZIO,
+		magnoliaConfigZIO
+	))
 	.dependsOn(model)
 
 lazy val model = (project in file("mini-octopus-model"))
