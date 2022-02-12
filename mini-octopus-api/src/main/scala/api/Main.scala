@@ -22,7 +22,7 @@ object Main extends App {
 
     (for {
       res <- VkApi
-        .sendMessage("Privet xyilo", UserId(51422811))
+        .sendMessage("Test message", UserId(51422811))
         .catchSome { case e: UnknownVkError =>
           ZIO(e.cause.getMessage)
         }
