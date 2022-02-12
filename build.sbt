@@ -15,8 +15,9 @@ lazy val api = (project in file("mini-octopus-api"))
 
 lazy val core = (project in file("mini-octopus-core"))
 	.settings(standartSettings, libraryDependencies ++= Seq(
-		zio,
+        zio,
         sttp,
+        jsonZIO,
 		configZIO,
 		typesafeConfigZIO,
 		magnoliaConfigZIO

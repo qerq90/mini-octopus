@@ -2,6 +2,7 @@ package api
 
 import core.config.Config
 import core.vk_api.VkApi
+import core.vk_api.VkApi.UnknownVkError
 import model.Model.UserId
 import model.config.VkConfig
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
@@ -19,6 +20,9 @@ object Main extends App {
 
     (for {
       res <- VkApi.sendMessage("Privet xyilo", UserId(51422811))
+        .catchSome {
+          case e: UnknownVkError => ZIO { e.cause.getMessage }
+        }
       _ <- ZIO.succeed(println(res))
     } yield ()).exitCode.provideCustomLayer(main).orDie
   }
