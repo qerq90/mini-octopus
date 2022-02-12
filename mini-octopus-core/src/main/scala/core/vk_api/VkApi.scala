@@ -14,10 +14,14 @@ object VkApi {
     val apiUrl = uri"https://api.vk.com/method/"
     val version = Map("v" -> "5.131")
 
-    def sendMessage(message: String, userId: UserId): IO[VkApiError, VkMessageSendResponse]
+    def sendMessage(
+        message: String,
+        userId: UserId): IO[VkApiError, VkMessageSendResponse]
   }
 
-  def sendMessage(message: String, userId: UserId): ZIO[Env, VkApiError, VkMessageSendResponse] =
+  def sendMessage(
+      message: String,
+      userId: UserId): ZIO[Env, VkApiError, VkMessageSendResponse] =
     ZIO.accessM(_.get.sendMessage(message, userId))
 
   val live: ZLayer[Has[SttpClient.Service] with Has[VkConfig], Nothing, Env] =
@@ -27,8 +31,8 @@ object VkApi {
 
   // for future errors in api
   sealed abstract class VkApiError(message: String, cause: Option[Throwable])
-    extends RuntimeException(message, cause.orNull)
+      extends RuntimeException(message, cause.orNull)
 
   final case class UnknownVkError(cause: Throwable)
-    extends VkApiError("Unknown error occured", Some(cause))
+      extends VkApiError("Unknown error occured", Some(cause))
 }

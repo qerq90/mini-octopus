@@ -12,11 +12,11 @@ trait Creature {
 
   def getHealed(heal: Int): Unit = heal + hp match {
     case healedHp if healedHp > maxHp => hp = maxHp
-    case healedHp => hp = healedHp 
+    case healedHp => hp = healedHp
   }
 
   def getActualStatus = hp match {
-    case hp if hp <= 0 => { status = Status.Dead; status }
-    case _ => status 
+    case hp if hp <= 0 => status = Status.Dead; status
+    case _ => status
   }
 }
