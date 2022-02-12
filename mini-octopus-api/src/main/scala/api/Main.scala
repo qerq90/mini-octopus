@@ -12,16 +12,19 @@ import zio.config.syntax.ZIOConfigNarrowOps
 case class Main(vk: VkConfig)
 
 object Main extends App {
+
   override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
 
     val main: Layer[Throwable, VkApi.Env] =
-      (AsyncHttpClientZioBackend.layer() ++ Config.makeConfig[Main].narrow(_.vk))
+      (AsyncHttpClientZioBackend
+        .layer() ++ Config.makeConfig[Main].narrow(_.vk))
         .>>>(VkApi.live)
 
     (for {
-      res <- VkApi.sendMessage("Privet xyilo", UserId(51422811))
-        .catchSome {
-          case e: UnknownVkError => ZIO { e.cause.getMessage }
+      res <- VkApi
+        .sendMessage("Privet xyilo", UserId(51422811))
+        .catchSome { case e: UnknownVkError =>
+          ZIO(e.cause.getMessage)
         }
       _ <- ZIO.succeed(println(res))
     } yield ()).exitCode.provideCustomLayer(main).orDie
