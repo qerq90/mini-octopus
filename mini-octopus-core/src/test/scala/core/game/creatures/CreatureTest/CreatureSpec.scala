@@ -16,7 +16,7 @@ class CreatureSpec extends FunSuite {
       status: Status = Alive,
       race: Race = Human
   ): DummyBasicCreature =
-    DummyBasicCreature(lvl, atk, hp, maxHp, status, race)
+    DummyBasicCreature(lvl, race, atk, hp, maxHp, status)
 
   test("Creature actually takes dmg from while getting damaged") {
     val creature = getDummyCreature()

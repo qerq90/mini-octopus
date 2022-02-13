@@ -1,9 +1,10 @@
 package core.game.creatures
 
-import model.{Race, Status}
+import model.{Race, Rarity, Status}
 
 case class Mob(
     name: String,
+    rarity: Rarity,
     override val lvl: Int,
     override val race: Race,
     override var hp: Int,
