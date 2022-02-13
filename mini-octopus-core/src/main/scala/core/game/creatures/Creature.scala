@@ -1,9 +1,11 @@
 package core.game.creatures
 
-import model.Status
+import model.{Race, Status}
 
 trait Creature {
-  var lvl: Int
+  val lvl: Int
+  val race: Race
+
   var hp: Int
   var maxHp: Int
   var attack: Int
@@ -32,6 +34,7 @@ object Creature {
       override var attack: Int,
       override var hp: Int,
       override var maxHp: Int,
-      override var status: Status)
+      override var status: Status,
+      override val race: Race)
       extends Creature
 }

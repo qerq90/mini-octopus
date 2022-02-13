@@ -1,12 +1,13 @@
 package core.game.creatures
 
 import model.Model.UserId
-import model.Status
+import model.{Race, Status}
 
 case class Hero(
     id: UserId,
     name: String,
-    override var lvl: Int,
+    override val lvl: Int,
+    override val race: Race,
     override var hp: Int,
     override var maxHp: Int,
     override var attack: Int,
@@ -22,7 +23,8 @@ object Hero {
       userId: UserId,
       name: String,
       lvl: Int,
+      race: Race,
       hp: Int,
       attack: Int): Hero =
-    new Hero(userId, name, lvl, hp, hp, attack, Status.Alive)
+    new Hero(userId, name, lvl, race, hp, hp, attack, Status.Alive)
 }
