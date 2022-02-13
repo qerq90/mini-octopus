@@ -1,6 +1,6 @@
 package core.game.creatures
 
-import model.{Race, Status}
+import model.{Race, Rarity, Status}
 
 trait Creature {
   val lvl: Int
@@ -21,7 +21,7 @@ trait Creature {
     case healedHp => hp = healedHp
   }
 
-  def getActualStatus = hp match {
+  def getActualStatus: Status = hp match {
     case hp if hp <= 0 => status = Status.Dead; status
     case _ => status
   }
@@ -31,10 +31,10 @@ object Creature {
 
   case class DummyBasicCreature(
       override val lvl: Int,
+      override val race: Race,
       override var attack: Int,
       override var hp: Int,
       override var maxHp: Int,
-      override var status: Status,
-      override val race: Race)
+      override var status: Status)
       extends Creature
 }
