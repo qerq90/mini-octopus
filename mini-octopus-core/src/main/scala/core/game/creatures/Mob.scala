@@ -8,8 +8,8 @@ case class Mob(
     override val lvl: Int,
     override val race: Race,
     override var hp: Int,
-    override var attack: Int,
     override var maxHp: Int,
+    override var attack: Int,
     override var status: Status)
     extends Creature {
 
