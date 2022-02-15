@@ -3,6 +3,7 @@ package core.vk_api
 import core.vk_api.response.VkMessageSendResponse
 import model.Model.UserId
 import model.config.VkConfig
+import model.vk_api.Attachment
 import sttp.client3._
 import sttp.client3.asynchttpclient.zio.SttpClient
 import zio.{Has, IO, ZIO, ZLayer}
@@ -16,6 +17,12 @@ object VkApi {
 
     def sendMessage(
         message: String,
+        userId: UserId,
+        attachments: List[Attachment]
+    ): IO[VkApiError, VkMessageSendResponse]
+
+    def sendMessage(
+        message: String,
         userId: UserId): IO[VkApiError, VkMessageSendResponse]
   }
 
@@ -23,6 +30,13 @@ object VkApi {
       message: String,
       userId: UserId): ZIO[Env, VkApiError, VkMessageSendResponse] =
     ZIO.accessM(_.get.sendMessage(message, userId))
+
+  def sendMessage(
+      message: String,
+      userId: UserId,
+      attachments: List[Attachment]
+  ): ZIO[Env, VkApiError, VkMessageSendResponse] =
+    ZIO.accessM(_.get.sendMessage(message, userId, attachments))
 
   val live: ZLayer[Has[SttpClient.Service] with Has[VkConfig], Nothing, Env] =
     ZLayer.fromServices[SttpClient.Service, VkConfig, VkApi](

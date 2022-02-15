@@ -4,6 +4,7 @@ import core.vk_api.VkApi.{UnknownVkError, VkApi, VkApiError}
 import core.vk_api.response.VkMessageSendResponse
 import model.Model.UserId
 import model.config.VkConfig
+import model.vk_api.Attachment
 import sttp.client3.asynchttpclient.zio.SttpClient
 import sttp.client3.{basicRequest, UriContext}
 import zio.json._
@@ -17,13 +18,15 @@ final case class VkApiLive(sttp: SttpClient.Service, config: VkConfig)
 
   override def sendMessage(
       message: String,
-      userId: UserId): IO[VkApiError, VkMessageSendResponse] = {
+      userId: UserId,
+      attachments: List[Attachment]): IO[VkApiError, VkMessageSendResponse] = {
     val url = apiUrl + "messages.send"
     val reqBody = Map(
       "message" -> message,
       "user_id" -> userId.value.toString,
       "access_token" -> token,
-      "random_id" -> randomId
+      "random_id" -> randomId,
+      "attachment" -> attachments.mkString(",")
     ) ++ version
 
     for {
@@ -36,6 +39,12 @@ final case class VkApiLive(sttp: SttpClient.Service, config: VkConfig)
         .mapVkError
       answer <- ZIO.fromEither(res).mapVkError
     } yield answer
+  }
+
+  override def sendMessage(
+      message: String,
+      userId: UserId): IO[VkApiError, VkMessageSendResponse] = {
+    sendMessage(message, userId, List())
   }
 
   private def randomId = Random.between(Int.MinValue, Int.MaxValue).toString
