@@ -2,8 +2,8 @@
 
 - [ ] Vk-api client abstraction
     - [x] text send method
-    - [ ] image send method
-    - [ ] audio send method
+    - [x] image send method
+    - [x] audio send method
     - [ ] user get method
 - [ ] Game core
     - [x] Monster generator
