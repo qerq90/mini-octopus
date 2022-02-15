@@ -1,0 +1,28 @@
+## Pangea Project
+
+- [ ] Vk-api client abstraction
+    - [x] text send method
+    - [ ] image send method
+    - [ ] audio send method
+    - [ ] user get method
+- [ ] Game core
+    - [x] Monster generator
+    - [ ] Hero generator
+    - [ ] Fight generator
+    - [ ] Fight handler
+    - [ ] Loot generator
+    - [ ] State handler
+    - [ ] Command handler
+- [ ] Webserver
+    - [ ] find good webserver
+    - [ ] set up vk handler with "Ok"
+- [ ] Event handler for vk events
+    - [ ] EventHandler abstraction
+    - [ ] Event to command translator
+- [x] Config parser
+    - [x] parse config from resources
+    - [ ] find how to make config parsing more generic
+- [ ] Content
+    - [ ] Name generator for mobs
+    - [ ] Add more races / mob variants
+    - [ ] and so on ...
