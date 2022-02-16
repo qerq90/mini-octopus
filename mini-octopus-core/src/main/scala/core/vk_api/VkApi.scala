@@ -1,9 +1,9 @@
 package core.vk_api
 
-import core.vk_api.response.VkMessageSendResponse
 import model.Model.UserId
 import model.config.VkConfig
 import model.vk_api.Attachment
+import model.vk_api.response.{VkMessageSendResponse, VkUserGetResponse}
 import sttp.client3._
 import sttp.client3.asynchttpclient.zio.SttpClient
 import zio.{Has, IO, ZIO, ZLayer}
@@ -13,7 +13,8 @@ object VkApi {
 
   trait VkApi {
     val apiUrl = uri"https://api.vk.com/method/"
-    val version = Map("v" -> "5.131")
+
+    def getUser(ids: List[UserId]): IO[VkApiError, VkUserGetResponse]
 
     def sendMessage(
         message: String,
@@ -37,6 +38,9 @@ object VkApi {
       attachments: List[Attachment]
   ): ZIO[Env, VkApiError, VkMessageSendResponse] =
     ZIO.accessM(_.get.sendMessage(message, userId, attachments))
+
+  def getUser(ids: List[UserId]): ZIO[Env, VkApiError, VkUserGetResponse] =
+    ZIO.accessM(_.get.getUser(ids))
 
   val live: ZLayer[Has[SttpClient.Service] with Has[VkConfig], Nothing, Env] =
     ZLayer.fromServices[SttpClient.Service, VkConfig, VkApi](
