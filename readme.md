@@ -1,10 +1,11 @@
 ## Pangea Project
 
-- [x] Vk-api client abstraction
+- [ ] Vk-api client abstraction
     - [x] text send method
     - [x] image send method
     - [x] audio send method
     - [x] user get method
+    - [ ] vk repository
 - [ ] Game core
     - [x] Monster generator
     - [ ] Hero generator
