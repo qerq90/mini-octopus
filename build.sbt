@@ -18,7 +18,6 @@ lazy val core = (project in file("mini-octopus-core"))
     libraryDependencies ++= Seq(
       zio,
       sttp,
-      jsonZIO,
       configZIO,
       typesafeConfigZIO,
       magnoliaConfigZIO,
@@ -30,7 +29,8 @@ lazy val model = (project in file("mini-octopus-model"))
   .settings(
     standartSettings,
     libraryDependencies ++= Seq(
-      enumeratum
+      enumeratum,
+      jsonZIO
     ))
 
 lazy val standartSettings = Seq(
