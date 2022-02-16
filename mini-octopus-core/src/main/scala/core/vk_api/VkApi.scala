@@ -13,7 +13,6 @@ object VkApi {
 
   trait VkApi {
     val apiUrl = uri"https://api.vk.com/method/"
-    val version = Map("v" -> "5.131")
 
     def getUser(ids: List[UserId]): IO[VkApiError, VkUserGetResponse]
 

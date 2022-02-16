@@ -14,20 +14,18 @@ import scala.util.Random
 
 final case class VkApiLive(sttp: SttpClient.Service, config: VkConfig)
     extends VkApi {
-  private val token = config.token
 
   override def sendMessage(
       message: String,
       userId: UserId,
       attachments: List[Attachment]): IO[VkApiError, VkMessageSendResponse] = {
     val url = apiUrl + "messages.send"
-    val reqBody = Map(
+    val reqBody = basicSettings ++ Map(
       "message" -> message,
       "user_id" -> userId.value.toString,
-      "access_token" -> token,
       "random_id" -> randomId,
       "attachment" -> attachments.mkString(",")
-    ) ++ version
+    )
 
     for {
       response <- sttp
@@ -49,10 +47,9 @@ final case class VkApiLive(sttp: SttpClient.Service, config: VkConfig)
 
   override def getUser(ids: List[UserId]): IO[VkApiError, VkUserGetResponse] = {
     val url = apiUrl + "users.get"
-    val reqBody = Map(
-      "user_ids" -> ids.map(_.value).mkString(","),
-      "access_token" -> token
-    ) ++ version
+    val reqBody = basicSettings ++ Map(
+      "user_ids" -> ids.map(_.value).mkString(",")
+    )
 
     for {
       response <- sttp
@@ -74,4 +71,11 @@ final case class VkApiLive(sttp: SttpClient.Service, config: VkConfig)
       z.mapError(errorString =>
         UnknownVkError(new RuntimeException(errorString)))
   }
+
+  private val token = config.token
+
+  private val basicSettings = Map(
+    "access_token" -> token,
+    "v" -> "5.131"
+  )
 }

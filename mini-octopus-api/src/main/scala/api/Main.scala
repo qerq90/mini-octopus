@@ -9,7 +9,7 @@ import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
 import zio._
 import zio.config.syntax.ZIOConfigNarrowOps
 
-case class Main(vk: VkConfig)
+case class MainConfig(vk: VkConfig)
 
 object Main extends App {
 
@@ -17,7 +17,7 @@ object Main extends App {
 
     val main: Layer[Throwable, VkApi.Env] =
       (AsyncHttpClientZioBackend
-        .layer() ++ Config.makeConfig[Main].narrow(_.vk))
+        .layer() ++ Config.makeConfig[MainConfig].narrow(_.vk))
         .>>>(VkApi.live)
 
     (for {
