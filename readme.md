@@ -8,7 +8,7 @@
     - [ ] vk repository
 - [ ] Game core
     - [x] Monster generator
-    - [ ] Hero generator
+    - [x] Hero generator
     - [ ] Fight generator
     - [ ] Fight handler
     - [ ] Loot generator
