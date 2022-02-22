@@ -7,9 +7,9 @@
     - [x] user get method
     - [ ] vk repository
 - [ ] Game core
-    - [x] Monster generator
-    - [x] Hero generator
-    - [ ] Fight generator
+    - [x] Creature abstraction
+    - [x] Fight abstraction
+    - [ ] CreatureFactory (HeroGenerator/MonsterGenerator) 
     - [ ] Fight handler
     - [ ] Loot generator
     - [ ] State handler

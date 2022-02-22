@@ -1,6 +1,8 @@
 package core.game.creatures.CreatureTest
 
 import core.game.creatures.Creature
+import core.game.model.Model
+import core.game.model.Model.CreatureId
 import model.Race.Human
 import model.{Race, Status}
 import model.Status._
@@ -16,6 +18,7 @@ class CreatureSpec extends FunSuite {
       statusCreature: Status = Alive,
       raceCreature: Race = Human
   ): Creature = new Creature {
+    override val id: Model.CreatureId = CreatureId(1)
     override val lvl: Int = lvlCreature
     override val race: Race = raceCreature
     override var attack: Int = atkCreature
