@@ -15,7 +15,8 @@
     - [ ] State handler
     - [ ] Command handler
 - [ ] Webserver
-    - [ ] find good webserver
+    - [x] find good webserver
+    - [ ] make zio-http app
     - [ ] set up vk handler with "Ok"
 - [ ] Event handler for vk events
     - [ ] EventHandler abstraction
