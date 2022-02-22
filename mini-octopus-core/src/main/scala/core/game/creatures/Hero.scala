@@ -1,15 +1,15 @@
 package core.game.creatures
 
-import model.Model.UserId
+import core.game.model.Model.{CreatureId}
 import model.{Race, Status}
 
 case class Hero(
-    id: UserId,
     name: String,
     strength: Int,
     vitality: Int,
     intelligence: Int,
     agility: Int,
+    id: CreatureId,
     lvl: Int,
     race: Race,
     var hp: Int,

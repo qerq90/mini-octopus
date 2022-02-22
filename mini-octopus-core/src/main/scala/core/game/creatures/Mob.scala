@@ -1,8 +1,10 @@
 package core.game.creatures
 
+import core.game.model.Model.CreatureId
 import model.{Race, Rarity, Status}
 
 case class Mob(
+    id: CreatureId,
     name: String,
     rarity: Rarity,
     lvl: Int,

@@ -1,5 +1,6 @@
 package core.game.creatures
 
+import core.game.model.Model.CreatureId
 import core.util.RichSeq.RichSeq
 import model.Race.Human
 import model.Rarity.Common
@@ -50,6 +51,7 @@ object MobGenerator {
       .between(0.8, 1.2)).toInt
     val maxHp = hp
 
-    Mob(name, rarity, lvl, race, hp, maxHp, atk, Alive)
+    //TODO think on how to generate ids for creatures
+    Mob(CreatureId(0), name, rarity, lvl, race, hp, maxHp, atk, Alive)
   }
 }
