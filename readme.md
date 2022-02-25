@@ -16,8 +16,9 @@
     - [ ] Command handler
 - [ ] Webserver
     - [x] find good webserver
-    - [ ] make zio-http app
-    - [ ] set up vk handler with "Ok"
+    - [x] make zio-http app
+    - [x] set up vk handler with "Ok"
+    - [ ] make server zio service
 - [ ] Event handler for vk events
     - [ ] EventHandler abstraction
     - [ ] Event to command translator
