@@ -8,17 +8,15 @@ import model.config.VkConfig
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
 import zio._
 import zio.config.syntax.ZIOConfigNarrowOps
+import zio.magic._
 
 case class MainConfig(vk: VkConfig)
 
 object Main extends App {
 
-  override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
+  type Env = VkApi.Env
 
-    val main: Layer[Throwable, VkApi.Env] =
-      (AsyncHttpClientZioBackend
-        .layer() ++ Config.makeConfig[MainConfig].narrow(_.vk))
-        .>>>(VkApi.live)
+  override def run(args: List[String]): URIO[zio.ZEnv, ExitCode] = {
 
     (for {
       res <- VkApi
@@ -27,6 +25,12 @@ object Main extends App {
           ZIO(e.cause.getMessage)
         }
       _ <- ZIO.succeed(println(res))
-    } yield ()).exitCode.provideCustomLayer(main).orDie
+    } yield ()).exitCode.provideCustomLayer(makeEnv).orDie
   }
+
+  def makeEnv: ZLayer[Any, Throwable, Env] = ZLayer.wire[Env](
+    AsyncHttpClientZioBackend.layer(),
+    Config.makeConfig[MainConfig].narrow(_.vk),
+    VkApi.live
+  )
 }

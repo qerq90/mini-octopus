@@ -9,7 +9,12 @@ lazy val root = (project in file("."))
   .aggregate(core, api, model)
 
 lazy val api = (project in file("mini-octopus-api"))
-  .settings(standartSettings)
+  .settings(
+    standartSettings,
+    libraryDependencies ++= Seq(
+      zioMagic
+    )
+  )
   .dependsOn(core, model)
 
 lazy val core = (project in file("mini-octopus-core"))
