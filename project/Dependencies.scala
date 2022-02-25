@@ -5,6 +5,7 @@ object Versions {
   val zioVersion = "1.0.9"
   val zioJsonVersion = "0.1.5"
   val zioMagicVersion = "0.3.11"
+  val ZHTTPVersion = "1.0.0.0-RC24"
 
   val sttpVersion = "3.4.1"
   val scalaTestVersion = "3.0.8"
@@ -17,6 +18,7 @@ object Dependencies {
 
   val zio = "dev.zio" %% "zio" % zioVersion
   val zioMagic = "io.github.kitlangton" %% "zio-magic" % zioMagicVersion
+  val ZHTTP = "io.d11" %% "zhttp" % ZHTTPVersion
 
   val sttp =
     "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio1" % sttpVersion

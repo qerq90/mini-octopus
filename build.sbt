@@ -12,7 +12,8 @@ lazy val api = (project in file("mini-octopus-api"))
   .settings(
     standartSettings,
     libraryDependencies ++= Seq(
-      zioMagic
+      zioMagic,
+      ZHTTP
     )
   )
   .dependsOn(core, model)
