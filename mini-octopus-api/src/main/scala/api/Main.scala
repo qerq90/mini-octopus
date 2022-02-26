@@ -1,13 +1,14 @@
 package api
 
+import api.routes.Router
 import core.config.Config
 import core.vk_api.VkApi
 import model.config.{ServerConfig, VkConfig}
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
+import zhttp.http.Http
 import zio._
 import zio.config.syntax.ZIOConfigNarrowOps
 import zio.magic._
-import zhttp.http._
 import zhttp.service.server.ServerChannelFactory
 import zhttp.service.{EventLoopGroup, Server, ServerChannelFactory}
 
@@ -32,7 +33,9 @@ object Main extends App {
     ZIO.accessM(serverConfig =>
       UIO(
         Server.port(serverConfig.get.port) ++
-          Server.app(Http.ok)))
+          Server.app(
+            Router.routes.catchAll(_ => Http.text("Error occured"))
+          )))
 
   val config: ZLayer[Any, Throwable, Has[MainConfig]] =
     Config.makeConfig[MainConfig]
