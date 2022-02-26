@@ -12,8 +12,8 @@ class Config[T: Descriptor: Tag] {
 
   // local > application
   val resources = List(
-    "resources/application.local.conf",
-    "resources/application.conf"
+    "application.local.conf",
+    "application.conf"
   )
 
   def getConfig: ULayer[Has[T]] = TypesafeConfig
