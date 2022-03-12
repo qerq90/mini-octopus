@@ -9,17 +9,19 @@ object Router {
 
   val routes: Http[Any, Throwable, Request, Response] =
     Http.collectZIO[Request] {
-      case req @ (Method.POST -> !!) =>
+      case req @ Method.POST -> _ =>
         for {
-          json <- req.bodyAsString.map(_.fromJson[VkChecking])
+          body <- req.bodyAsString
+          json = body.fromJson[VkChecking]
           response = json match {
             case Right(v)
                 if v.`type` == "confirmation" && v.groupId == 171104414 =>
               "beeb21d7"
-            case _ => "invalid data"
+            case _ => println(body); "ok"
           }
         } yield Response.text(response)
-      case (Method.GET -> !!) =>
+
+      case Method.GET -> _ =>
         UIO(Response.text("Ok"))
     }
 }
