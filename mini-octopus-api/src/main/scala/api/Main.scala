@@ -30,12 +30,12 @@ object Main extends App {
   val nThreads = 10
 
   val makeServer: ZIO[Has[ServerConfig], Nothing, Server[Any, Nothing]] =
-    ZIO.accessM(serverConfig =>
-      UIO(
-        Server.port(serverConfig.get.port) ++
-          Server.app(
-            Router.routes.catchAll(_ => Http.text("Error occured"))
-          )))
+    ZIO.access(serverConfig =>
+      Server.port(serverConfig.get.port) ++
+        Server.app(
+          Router.routes
+            .catchAll(_ => Http.text("Error occured"))
+        ))
 
   val config: ZLayer[Any, Throwable, Has[MainConfig]] =
     Config.makeConfig[MainConfig]
