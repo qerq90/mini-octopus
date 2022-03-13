@@ -6,7 +6,7 @@ import zio.interop.catz._
 import doobie.util.transactor.Transactor
 import zio.Task
 
-final case class mainDaoPg(xa: Transactor[Task]) extends mainDao.mainDao {
+final case class MainDaoPg(xa: Transactor[Task]) extends MainDao.MainDao {
 
   override def saveUserHero(hero: Hero): Task[Unit] = {
     sql"""INSERT INTO heros
