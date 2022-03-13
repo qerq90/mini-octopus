@@ -4,10 +4,10 @@ import core.game.creatures.Hero
 import doobie.hikari.HikariTransactor
 import zio.{Has, Task, ZIO, ZLayer}
 
-object mainDao {
-  type Env = Has[mainDao]
+object MainDao {
+  type Env = Has[MainDao]
 
-  trait mainDao {
+  trait MainDao {
     def saveUserHero(hero: Hero): Task[Unit]
   }
 
@@ -15,5 +15,5 @@ object mainDao {
     ZIO.accessM(_.get.saveUserHero(hero))
 
   val live: ZLayer[Has[HikariTransactor[Task]], Nothing, Env] =
-    ZLayer.fromService[HikariTransactor[Task], mainDao](mainDaoPg)
+    ZLayer.fromService[HikariTransactor[Task], MainDao](MainDaoPg)
 }
