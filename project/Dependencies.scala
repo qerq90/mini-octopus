@@ -6,6 +6,8 @@ object Versions {
   val zioJsonVersion = "0.1.5"
   val zioMagicVersion = "0.3.11"
   val ZHTTPVersion = "1.0.0.0-RC24"
+  val doobieVersion = "0.13.4"
+  val zioInteropCatsVersion = "2.1.4.0"
 
   val sttpVersion = "3.4.1"
   val scalaTestVersion = "3.0.8"
@@ -26,6 +28,11 @@ object Dependencies {
   val magnoliaConfigZIO = "dev.zio" %% "zio-config-magnolia" % zioVersion
   val configZIO = "dev.zio" %% "zio-config" % zioVersion
   val typesafeConfigZIO = "dev.zio" %% "zio-config-typesafe" % zioVersion
+
+  val doobieCore = "org.tpolecat" %% "doobie-core" % doobieVersion
+  val doobiePostgress = "org.tpolecat" %% "doobie-postgres" % doobieVersion
+  val doobieHikari = "org.tpolecat" %% "doobie-hikari" % doobieVersion
+  val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsVersion
 
   val scalaTest = "org.scalatest" %% "scalatest" % scalaTestVersion
 }
