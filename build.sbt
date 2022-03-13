@@ -27,8 +27,13 @@ lazy val core = (project in file("mini-octopus-core"))
       configZIO,
       typesafeConfigZIO,
       magnoliaConfigZIO,
+      doobieCore,
+      doobieHikari,
+      doobiePostgress,
+      zioInteropCats,
       scalaTest % Test
-    ))
+    )
+  )
   .dependsOn(model)
 
 lazy val model = (project in file("mini-octopus-model"))

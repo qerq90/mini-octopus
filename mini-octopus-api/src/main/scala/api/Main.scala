@@ -2,8 +2,9 @@ package api
 
 import api.routes.Router
 import core.config.Config
+import core.util.doobie.Transactor
 import core.vk_api.VkApi
-import model.config.{ServerConfig, VkConfig}
+import model.config.{PostgresConfig, ServerConfig, VkConfig}
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
 import zhttp.http.Http
 import zio._
@@ -12,7 +13,10 @@ import zio.magic._
 import zhttp.service.server.ServerChannelFactory
 import zhttp.service.{EventLoopGroup, Server, ServerChannelFactory}
 
-case class MainConfig(vk: VkConfig, server: ServerConfig)
+case class MainConfig(
+    vk: VkConfig,
+    server: ServerConfig,
+    postgres: PostgresConfig)
 
 object Main extends App {
 
@@ -45,6 +49,8 @@ object Main extends App {
       AsyncHttpClientZioBackend.layer(),
       config.narrow(_.server),
       config.narrow(_.vk),
+      config.narrow(_.postgres),
+      Transactor.makeLayer,
       VkApi.live,
       ServerChannelFactory.auto,
       EventLoopGroup.auto(nThreads)
