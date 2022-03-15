@@ -4,7 +4,7 @@ import api.routes.Router
 import core.config.Config
 import core.util.doobie.Transactor
 import core.vk_api.VkApi
-import dao.mainDao
+import dao.MainDao
 import model.config.{PostgresConfig, ServerConfig, VkConfig}
 import sttp.client3.asynchttpclient.zio.AsyncHttpClientZioBackend
 import zhttp.http.Http
@@ -23,7 +23,7 @@ case class MainConfig(
 object Main extends App {
 
   type Env = VkApi.Env
-    with mainDao.Env
+    with MainDao.Env
     with ServerChannelFactory
     with EventLoopGroup
     with Has[ServerConfig]
@@ -55,7 +55,7 @@ object Main extends App {
       config.narrow(_.postgres),
       Blocking.live,
       Transactor.makeLayer,
-      mainDao.live,
+      MainDao.live,
       VkApi.live,
       ServerChannelFactory.auto,
       EventLoopGroup.auto(nThreads)

@@ -1,6 +1,6 @@
 package api.routes
 
-import model.vk_api.request.VkChecking
+import model.vk_api.request.{VkChecking, VkEvent}
 import zhttp.http._
 import zio._
 import zio.json._
@@ -17,7 +17,15 @@ object Router {
             case Right(v)
                 if v.`type` == "confirmation" && v.groupId == 171104414 =>
               "beeb21d7"
-            case _ => println(body); "ok"
+            case _ =>
+              val json = body.fromJson[VkEvent]
+              json match {
+                case Right(v) => println(s"\nBody:\n$json\n")
+                //EventHandler.handle(v)
+                case _ =>
+                  println(s"\nError while parsing:\nBody:\n$body\n")
+              }
+              "ok"
           }
         } yield Response.text(response)
 
